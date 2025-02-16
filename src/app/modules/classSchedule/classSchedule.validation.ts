@@ -12,7 +12,7 @@ const createUserNameValidationSchema = z.object({
   lastName: z.string(),
 });
 
-const createTraineeValidationSchema = z.object({
+const createAdminValidationSchema = z.object({
   body: z.object({
     name: createUserNameValidationSchema,
     age: z.number({ invalid_type_error: "Age is required" }),
@@ -21,11 +21,12 @@ const createTraineeValidationSchema = z.object({
       .string()
       .email({ message: "Invalid email address." })
       .min(1, { message: "Email is required." }),
+    password: z.string().min(1, { message: "Password is required." }),
     role: z.enum(["admin", "trainer", "trainee"]).default("trainee"),
     isBlocked: z.boolean().default(false),
   }),
 });
 
-export const TraineeValidations = {
-  createTraineeValidationSchema,
+export const AdminValidations = {
+  createAdminValidationSchema,
 };

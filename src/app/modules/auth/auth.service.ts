@@ -5,10 +5,11 @@ import { TUserModle } from "./auth.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../../config";
+import { UserModle } from "../user/user.model";
 
 const loginUser = async (payload: TLoginUser) => {
   // check if user exists
-  const isUserExists = await TUserModle.findOne({ email: payload.email });
+  const isUserExists = await UserModle.findOne({ email: payload.email });
 
   if (!isUserExists) {
     throw new AppError(status.NOT_FOUND, "User not found");

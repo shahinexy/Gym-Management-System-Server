@@ -1,5 +1,4 @@
 import { TTrainer } from "./trainer.interface"
-import { TrainerModle } from "./trainer.model"
 
 
 

@@ -1,5 +1,4 @@
 
-import { UserModle } from "../user/user.model";
 
 
 const getAllUserFromDB = async () =>{
