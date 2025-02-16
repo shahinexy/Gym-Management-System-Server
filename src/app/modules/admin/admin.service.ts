@@ -1,15 +1,12 @@
 
+import { UserModle } from "../auth/auth.model";
 import { TDemo } from "./admin.interface";
 import { DemoModle } from "./admin.model";
 
 
-const createDemoInDB = async (DemoData: TDemo) =>{
-    const result = await DemoModle.create(DemoData)
-    return result
-}
 
-const getAllDemosFromDB = async () =>{
-    const result = await DemoModle.find()
+const getAllUserFromDB = async () =>{
+    const result = await UserModle.find()
     return result;
 }
 
@@ -28,24 +25,8 @@ const deleteSingleDemoFromDB = async (productId: string) =>{
     return result;
 }
 
-// const searchDemoFromDB = async (searchTerm: string) =>{
-
-//     const regexSearchTerm = new RegExp(searchTerm as string, 'i')
-
-//     const result = await DemoModle.find({
-//         $or: [
-//             {title: regexSearchTerm},
-//             {author: regexSearchTerm},
-//             {category: regexSearchTerm},
-//         ]
-//     })
-
-//     return result
-// }
-
-export const DemoService = {
-    createDemoInDB,
-    getAllDemosFromDB,
+export const AdminService = {
+    getAllUserFromDB,
     getSingleDemoFromDB,
     updateSingleDemoFromDB,
     deleteSingleDemoFromDB,

@@ -1,18 +1,9 @@
-import express from 'express'
-import { DemoController } from './admin.controller';
-
+import express from "express";
+import { AdminController } from "./admin.controller";
+import auth from "../../middleware/auth";
 
 const router = express.Router();
 
-router.post('/', DemoController.createDemo)
+router.get("/users", auth(), AdminController.getAllUsers);
 
-router.get('/', DemoController.getDemos)
-
-router.get('/:productId', DemoController.getSingleDemo)
-
-router.put('/:productId', DemoController.updateSingleDemo)
-
-router.delete('/:productId', DemoController.deleteSingleDemo)
-
-
-export const DemoRouter = router;
+export const AdminRouter = router;

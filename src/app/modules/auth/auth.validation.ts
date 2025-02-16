@@ -3,6 +3,8 @@ import { z } from "zod";
 const userRegisterValidationSchema = z.object({
   body: z.object({
     name: z.string().min(1, { message: "Name is required." }),
+    age: z.number({ invalid_type_error: "Age is required" }),
+    gender: z.enum(["male", "female"]),
     email: z
       .string()
       .email({ message: "Invalid email address." })
@@ -20,8 +22,7 @@ const userLoginValidationSchema = z.object({
   }),
 });
 
-
-export const AuthValidations ={
+export const AuthValidations = {
   userRegisterValidationSchema,
-  userLoginValidationSchema
+  userLoginValidationSchema,
 };
