@@ -1,9 +1,10 @@
 import express from "express";
-import { AdminController } from "./admin.controller";
 import auth from "../../middleware/auth";
+import { AdminControllers } from "./admin.controller";
 
 const router = express.Router();
 
-router.get("/users", auth('admin', 'trainee'), AdminController.getAllUsers);
+
+router.get("/users", auth('admin', 'trainee'), AdminControllers.getAllUsers);
 
 export const AdminRouter = router;

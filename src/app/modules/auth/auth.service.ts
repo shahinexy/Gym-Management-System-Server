@@ -1,26 +1,14 @@
 import status from "http-status";
 import AppError from "../../error/AppError";
-import { TLoginUser, TUserRegister } from "./auth.interface";
-import { UserModle } from "./auth.model";
+import { TLoginUser } from "./auth.interface";
+import { TUserModle } from "./auth.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import config from "../../config";
 
-const userRegisterIntoDB = async (payload: TUserRegister) => {
-  // check if user exists
-  const isUserExists = await UserModle.findOne({ email: payload.email });
-
-  if (isUserExists) {
-    throw new AppError(status.BAD_REQUEST, "User already exists");
-  }
-
-  const result = await UserModle.create(payload);
-  return result;
-};
-
 const loginUser = async (payload: TLoginUser) => {
   // check if user exists
-  const isUserExists = await UserModle.findOne({ email: payload.email });
+  const isUserExists = await TUserModle.findOne({ email: payload.email });
 
   if (!isUserExists) {
     throw new AppError(status.NOT_FOUND, "User not found");
@@ -56,6 +44,5 @@ const loginUser = async (payload: TLoginUser) => {
 };
 
 export const AuthServices = {
-  userRegisterIntoDB,
   loginUser,
 };

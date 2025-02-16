@@ -26,6 +26,12 @@ const trainerSchema = new Schema<TTrainer>(
       type: userNameSchema,
       required: true,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'User id is required'],
+      unique: true,
+      ref: "User",
+    },
     age: { type: Number, required: true },
     gender: { type: String, enum: ["male", "female"], required: true },
     image: { type: String, default: "" },
@@ -37,10 +43,6 @@ const trainerSchema = new Schema<TTrainer>(
     email: {
       type: String,
       unique: true,
-      required: true,
-    },
-    password: {
-      type: String,
       required: true,
     },
     assignedSchedules: [
@@ -57,14 +59,14 @@ const trainerSchema = new Schema<TTrainer>(
   {
     timestamps: true,
     toJSON: {
-      virtuals: true
-    }
+      virtuals: true,
+    },
   }
 );
 
 // virtual
-trainerSchema.virtual('fullName').get(function () {
-  return `${this?.name?.firstName } ${this?.name?.middleName } ${this?.name?.lastName }`;
+trainerSchema.virtual("fullName").get(function () {
+  return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
 });
 
 export const TrainerModle = model<TTrainer>("Trainer", trainerSchema);

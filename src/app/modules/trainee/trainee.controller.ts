@@ -2,12 +2,12 @@
 import sendResponse from "../../utils/sendResponse";
 import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
-import { AdminServices } from "./admin.service";
+import { TraineeServices } from "./trainee.service";
 
 
 const getAllUsers = catchAsync(async (req, res) => {
 
-  const result = await AdminServices.getAllUserFromDB();
+  const result = await TraineeServices.getAllUserFromDB();
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -17,6 +17,6 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
-export const AdminControllers = {
+export const TraineeControllers = {
   getAllUsers
 };

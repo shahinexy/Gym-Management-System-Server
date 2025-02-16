@@ -6,12 +6,6 @@ import { AuthValidations } from "./auth.validation";
 const router = express.Router();
 
 router.post(
-  "/register",
-  validateRequest(AuthValidations.userRegisterValidationSchema),
-  AuthController.userRegister
-);
-
-router.post(
   "/login",
   validateRequest(AuthValidations.userLoginValidationSchema),
   AuthController.loginUser

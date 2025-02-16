@@ -3,17 +3,6 @@ import sendResponse from "../../utils/sendResponse";
 import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
 
-const userRegister = catchAsync(async (req, res) => {
-  const result = await AuthServices.userRegisterIntoDB(req.body);
-
-  sendResponse(res, {
-    statusCode: status.OK,
-    success: true,
-    message: "User created successfully",
-    data: result,
-  });
-});
-
 const loginUser = catchAsync(async(req,res)=>{
   const result = await AuthServices.loginUser(req.body)
 
@@ -26,6 +15,5 @@ const loginUser = catchAsync(async(req,res)=>{
 })
 
 export const AuthController = {
-  userRegister,
   loginUser
 };

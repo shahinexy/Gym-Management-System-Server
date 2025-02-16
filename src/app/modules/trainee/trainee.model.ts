@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TUserName, TAdmin } from "./admin.interface";
+import { TUserName, TTrainee } from "./trainee.interface";
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -20,7 +20,7 @@ const userNameSchema = new Schema<TUserName>({
   },
 });
 
-const adminSchema = new Schema<TAdmin>(
+const traineeSchema = new Schema<TTrainee>(
   {
     name: {
       type: userNameSchema,
@@ -58,8 +58,8 @@ const adminSchema = new Schema<TAdmin>(
 );
 
 // virtual
-adminSchema.virtual("fullName").get(function () {
+traineeSchema.virtual("fullName").get(function () {
   return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
 });
 
-export const AdminModle = model<TAdmin>("Admin", adminSchema);
+export const TraineeModle = model<TTrainee>("Trainee", traineeSchema);

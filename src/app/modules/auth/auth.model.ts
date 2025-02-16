@@ -75,4 +75,4 @@ userRegisterSchema.post("save", function (doc, next) {
   next();
 });
 
-export const UserModle = model<TUserRegister>("User", userRegisterSchema);
+export const TUserModle = model<TUserRegister>("TUser", userRegisterSchema);

@@ -6,7 +6,7 @@ export type TUserName = {
   lastName: string;
 };
 
-export type TAdmin = {
+export type TTrainee = {
   name: TUserName;
   user: Types.ObjectId;
   age: number;
