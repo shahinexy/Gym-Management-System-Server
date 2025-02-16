@@ -31,4 +31,4 @@ const userRegisterSchema = new Schema<TUserRegister>(
   }
 );
 
-export const UsersModle = model<TUserRegister>("User", userRegisterSchema);
+export const UserModle = model<TUserRegister>("User", userRegisterSchema);

@@ -9,11 +9,23 @@ const userRegister = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
-    message: "Demo created successfully",
+    message: "User created successfully",
     data: result,
   });
 });
 
+const loginUser = catchAsync(async(req,res)=>{
+  const result = await AuthServices.loginUser(req.body)
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "User loged in successfully",
+    data: result,
+  });
+})
+
 export const AuthController = {
   userRegister,
+  loginUser
 };

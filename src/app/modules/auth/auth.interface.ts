@@ -5,3 +5,8 @@ export type TUserRegister = {
   role: "admin" | "trainer" | "trainee";
   isBlocked: boolean;
 };
+
+export type TLoginUser ={
+  email: string;
+  password: string;
+}
