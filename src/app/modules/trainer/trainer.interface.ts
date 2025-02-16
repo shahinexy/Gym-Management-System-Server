@@ -1,4 +1,4 @@
-import { USER_ROLE } from "./auth.constant";
+import { Types } from "mongoose";
 
 export type TUserName = {
   firstName: string;
@@ -6,20 +6,14 @@ export type TUserName = {
   lastName: string;
 };
 
-export type TUserRegister = {
+export type TTrainer = {
   name: TUserName;
   age: number;
   gender: "male" | "female";
-  image?: string;
+  image?: string,
   role: "admin" | "trainer" | "trainee";
   email: string;
   password: string;
+  assignedSchedules?: [Types.ObjectId];
   isBlocked: boolean;
 };
-
-export type TLoginUser = {
-  email: string;
-  password: string;
-};
-
-export type TUserRole = keyof typeof USER_ROLE;

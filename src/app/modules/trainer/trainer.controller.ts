@@ -1,21 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
-import { AdminService } from "./admin.service";
+import { TrainerService } from "./trainer.service";
 import sendResponse from "../../utils/sendResponse";
 import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
 
-const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-
-  const result = await AdminService.getAllUserFromDB();
+const createTrainer = catchAsync(async (req: Request, res: Response) => {
+  const result = await TrainerService.createTrainerIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
-    message: "User are retrieved Successfully",
+    message: "Demo created successfully",
     data: result,
   });
 });
+
+// const getDemos = catchAsync(async (req: Request, res: Response) => {
+//   const result = await DemoService.getAllDemosFromDB();
+
+//   sendResponse(res, {
+//     statusCode: status.OK,
+//     success: true,
+//     message: "Gert All Demos Successfully",
+//     data: result,
+//   });
+// });
 
 // const getSingleDemo = catchAsync(async (req: Request, res: Response) => {
 //   const { productId } = req.params;
@@ -58,6 +68,6 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 //   });
 // });
 
-export const AdminController = {
-  getAllUsers,
+export const TrainerController = {
+  createTrainer,
 };

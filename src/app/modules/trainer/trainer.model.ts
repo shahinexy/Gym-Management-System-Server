@@ -1,7 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TUserRegister, TUserName } from "./auth.interface";
-import bcrypt from "bcrypt";
-import config from "../../config";
+import { TTrainer, TUserName } from "./trainer.interface";
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -22,7 +20,7 @@ const userNameSchema = new Schema<TUserName>({
   },
 });
 
-const userRegisterSchema = new Schema<TUserRegister>(
+const trainerSchema = new Schema<TTrainer>(
   {
     name: {
       type: userNameSchema,
@@ -30,6 +28,12 @@ const userRegisterSchema = new Schema<TUserRegister>(
     },
     age: { type: Number, required: true },
     gender: { type: String, enum: ["male", "female"], required: true },
+    image: { type: String, default: "" },
+    role: {
+      type: String,
+      enum: ["admin", "trainee", "trainee"],
+      default: "trainee",
+    },
     email: {
       type: String,
       unique: true,
@@ -39,11 +43,12 @@ const userRegisterSchema = new Schema<TUserRegister>(
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      enum: ["admin", "trainee", "trainee"],
-      default: "trainee",
-    },
+    assignedSchedules: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "",
+      },
+    ],
     isBlocked: {
       type: Boolean,
       default: false,
@@ -58,21 +63,8 @@ const userRegisterSchema = new Schema<TUserRegister>(
 );
 
 // virtual
-userRegisterSchema.virtual('fullName').get(function () {
-  return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
+trainerSchema.virtual('fullName').get(function () {
+  return `${this?.name?.firstName } ${this?.name?.middleName } ${this?.name?.lastName }`;
 });
 
-userRegisterSchema.pre("save", async function (next) {
-  this.password = await bcrypt.hash(
-    this.password,
-    Number(config.bcrypt_salt_round)
-  );
-  next();
-});
-
-userRegisterSchema.post("save", function (doc, next) {
-  doc.password = "";
-  next();
-});
-
-export const UserModle = model<TUserRegister>("User", userRegisterSchema);
+export const TrainerModle = model<TTrainer>("Trainer", trainerSchema);

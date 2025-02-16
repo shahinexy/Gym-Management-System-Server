@@ -12,11 +12,12 @@ const createUserNameValidationSchema = z.object({
   lastName: z.string(),
 });
 
-const userRegisterValidationSchema = z.object({
+const createTrainerValidationSchema = z.object({
   body: z.object({
     name: createUserNameValidationSchema,
     age: z.number({ invalid_type_error: "Age is required" }),
     gender: z.enum(["male", "female"]),
+    image: z.string().optional(),
     email: z
       .string()
       .email({ message: "Invalid email address." })
@@ -27,14 +28,6 @@ const userRegisterValidationSchema = z.object({
   }),
 });
 
-const userLoginValidationSchema = z.object({
-  body: z.object({
-    email: z.string({ invalid_type_error: "Email is required" }),
-    password: z.string({ invalid_type_error: "Password is required" }),
-  }),
-});
-
-export const AuthValidations = {
-  userRegisterValidationSchema,
-  userLoginValidationSchema,
+export const TrainerValidationSchemas ={
+  createTrainerValidationSchema
 };
