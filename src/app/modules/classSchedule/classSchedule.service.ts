@@ -85,6 +85,13 @@ const getAllClassScheduleFromDB = async () => {
 };
 
 const getSingleClassScheduleFromDB = async (id: string) => {
+  // check if schedule exists
+  const isScheduleExists = await ClassScheduleModle.findById(id);
+
+  if (!isScheduleExists) {
+    throw new AppError(status.NOT_FOUND, "Class Schedule not found");
+  }
+
   const result = await ClassScheduleModle.findById(id);
   return result;
 };
@@ -136,10 +143,33 @@ const assignTraineeWithClassSchedule = async (
     throw new AppError(status.NOT_FOUND, "Class Schedule not found");
   }
 
+  // Ensure trainees are provided
+  if (!payload.trainees || payload.trainees.length === 0) {
+    throw new AppError(status.BAD_REQUEST, "No trainees provided");
+  }
+
+  // Calculate new trainee count
+  const newTraineeCount =
+    isScheduleExists.traineeCount + payload.trainees.length;
+
+  const maxTrainees = isScheduleExists.maxTrainees ?? 10;
+  // Ensure trainee limit is not exceeded
+  if (newTraineeCount > maxTrainees) {
+    throw new AppError(
+      status.FORBIDDEN,
+      `Cannot assign trainees. Maximum limit of ${isScheduleExists.maxTrainees} trainees reached.`
+    );
+  }
+
+  // Calculate available slots
+  const newAvailableSlots = maxTrainees - newTraineeCount;
+
   const result = await ClassScheduleModle.findByIdAndUpdate(
     id,
     {
       $addToSet: { trainees: { $each: payload.trainees } },
+      traineeCount: newTraineeCount,
+      availableSlots: newAvailableSlots,
     },
     {
       runValidators: true,
@@ -161,10 +191,18 @@ const removeTraineeFromClassSchedule = async (
     throw new AppError(status.NOT_FOUND, "Class Schedule not found");
   }
 
+  // Ensure that trainees are provided for removal
+  if (!payload.trainees || payload.trainees.length === 0) {
+    throw new AppError(status.BAD_REQUEST, "No trainees provided for removal");
+  }
+
+  const traineesNumber = payload.trainees.length;
+
   const result = await ClassScheduleModle.findByIdAndUpdate(
     id,
     {
       $pull: { trainees: { $in: payload.trainees } },
+      $inc: { traineeCount: -traineesNumber, availableSlots: traineesNumber },
     },
     {
       runValidators: true,
