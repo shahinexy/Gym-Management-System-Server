@@ -14,7 +14,7 @@ const timeStringSchema = z.string().refine(
 export const createScheduleValidationSchema = z.object({
   body: z
     .object({
-      day: z.enum(Days),
+      days: z.array(z.enum([...Days] as [string, ...string[]])),
       startTime: timeStringSchema,
       endTime: timeStringSchema,
       trainer: z.string(),

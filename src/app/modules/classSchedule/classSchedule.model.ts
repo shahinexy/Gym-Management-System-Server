@@ -4,11 +4,13 @@ import { Days } from "./classSchedule.constant";
 
 const classScheduleSchema = new Schema<TClassSchedule>(
   {
-    day: {
-      type: String,
-      enum: Days,
-      required: true,
-    },
+    days: [
+      {
+        type: String,
+        enum: Days,
+        required: true,
+      },
+    ],
     startTime: {
       type: String,
       required: true,
@@ -35,9 +37,11 @@ const classScheduleSchema = new Schema<TClassSchedule>(
     },
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
-
-export const ClassScheduleModle = model<TClassSchedule>("ClassSchedule", classScheduleSchema);
+export const ClassScheduleModle = model<TClassSchedule>(
+  "ClassSchedule",
+  classScheduleSchema
+);

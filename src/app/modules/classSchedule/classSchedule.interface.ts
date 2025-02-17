@@ -1,12 +1,18 @@
 import { Types } from "mongoose";
 
-export type TDays = 'Sat' | 'Sun' | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri';
+export type TDay = "Sat" | "Sun" | "Mon" | "Tue" | "Wed" | "Thu" | "Fri";
 
 export type TClassSchedule = {
-  day: TDays;
+  days: TDay[];
   startTime: string;
   endTime: string;
   trainer: Types.ObjectId;
   trainees?: Types.ObjectId[];
   traineeCount: number;
+};
+
+export type TSchedule = {
+  days: TDay[];
+  startTime: string;
+  endTime: string;
 };

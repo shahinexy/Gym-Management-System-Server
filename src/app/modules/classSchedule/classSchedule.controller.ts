@@ -17,6 +17,19 @@ const createClassSchedule = catchAsync(async (req, res) => {
   });
 });
 
+const getAllClassSchedule = catchAsync(async (req, res) => {
+
+  const result = await ClassScheduleServices.getAllClassScheduleFromDB();
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "User are retrieved Successfully",
+    data: result,
+  });
+});
+
 export const ClassScheduleControllers = {
-  createClassSchedule
+  createClassSchedule,
+  getAllClassSchedule
 };

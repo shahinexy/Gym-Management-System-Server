@@ -11,4 +11,6 @@ router.post(
   ClassScheduleControllers.createClassSchedule
 );
 
+router.get('/', ClassScheduleControllers.getAllClassSchedule)
+
 export const ClassScheduleRouters = router;
