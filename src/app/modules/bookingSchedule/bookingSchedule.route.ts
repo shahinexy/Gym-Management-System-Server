@@ -11,4 +11,6 @@ router.post("/cancel-schedule", auth('trainee'), BookingScheduleControllers.canc
 
 router.get("/",  BookingScheduleControllers.getAllBookedSchedule);
 
+router.get("/my-booked-schedules", auth('trainee'), BookingScheduleControllers.myBookedScheduls);
+
 export const BookingScheuleRouters = router;

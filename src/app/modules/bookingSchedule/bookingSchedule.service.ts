@@ -148,8 +148,14 @@ const getAllBookedScheduleFromDB = async () => {
   const result = await BookingScheduleModle.find();
   return result;
 };
+
+const myBookedScheduls = async (userId: string)=>{
+  const result = await BookingScheduleModle.find({trainee: userId})
+  return result
+}
 export const BookingScheduleServices = {
   createBookingScheduleIntoDB,
   getAllBookedScheduleFromDB,
-  cancleBookedScheduleFromDB
+  cancleBookedScheduleFromDB,
+  myBookedScheduls
 };

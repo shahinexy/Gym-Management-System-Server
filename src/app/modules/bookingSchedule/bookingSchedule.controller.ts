@@ -47,8 +47,22 @@ const getAllBookedSchedule = catchAsync(async (req, res) => {
   });
 });
 
+const myBookedScheduls = catchAsync(async (req, res) => {
+  const { userId } = req.user as JwtPayload;
+
+  const result = await BookingScheduleServices.myBookedScheduls(userId);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Get my booked schedules successfully",
+    data: result,
+  });
+});
+
 export const BookingScheduleControllers = {
   createBookingSchedule,
   cancleBookedSchedule,
   getAllBookedSchedule,
+  myBookedScheduls
 };
