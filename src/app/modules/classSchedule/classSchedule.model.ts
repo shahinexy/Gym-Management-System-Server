@@ -44,6 +44,6 @@ const classScheduleSchema = new Schema<TClassSchedule>(
 );
 
 export const ClassScheduleModle = model<TClassSchedule>(
-  "ClassSchedule",
+  "Class-Schedule",
   classScheduleSchema
 );

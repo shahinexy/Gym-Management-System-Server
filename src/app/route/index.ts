@@ -5,6 +5,7 @@ import { UserRouters } from "../modules/user/user.route";
 import { AdminRouters } from "../modules/admin/admin.route";
 import { TraineeRouters } from "../modules/trainee/trainee.route";
 import { ClassScheduleRouters } from "../modules/classSchedule/classSchedule.route";
+import { BookingScheuleRouters } from "../modules/bookingSchedule/bookingSchedule.route";
 
 const router = express.Router();
 
@@ -32,6 +33,10 @@ const moduleRouter = [
   {
     path: "/class-schedules",
     router: ClassScheduleRouters,
+  },
+  {
+    path: "/bookings",
+    router: BookingScheuleRouters,
   },
 ];
 
