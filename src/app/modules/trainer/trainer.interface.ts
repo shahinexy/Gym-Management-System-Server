@@ -14,6 +14,5 @@ export type TTrainer = {
   image?: string;
   role: "admin" | "trainer" | "trainee";
   email: string;
-  assignedSchedules?: Types.ObjectId[];
   isBlocked: boolean;
 };

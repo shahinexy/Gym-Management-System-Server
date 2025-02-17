@@ -45,12 +45,6 @@ const trainerSchema = new Schema<TTrainer>(
       unique: true,
       required: true,
     },
-    assignedSchedules: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "ClassSchedule",
-      },
-    ],
     isBlocked: {
       type: Boolean,
       default: false,

@@ -40,6 +40,7 @@ const createAdminIntoDB = async (password: string, payload: TAdmin) => {
 
     // set trainer user id
     payload.user = newUser[0]._id;
+    payload.role = 'admin'
     // create trainer
     const newAdmin = await AdminModle.create([payload], { session });
 
