@@ -6,6 +6,9 @@ The Gym Management System streamlines class scheduling and membership with Admin
 - **Admin Login Credential** 
   - Email: shahin@gmail.com 
   - Password: Shahin123
+  
+**ER Diagram Link:** https://lucid.app/lucidchart/0676a86b-3242-43eb-8920-3e35e28bac03/edit?viewport_loc=-1702%2C-757%2C3260%2C1541%2C0_0&invitationId=inv_d0782d1d-699e-4c8b-83ef-19c8ed763f88
+
 
 ## Key Features
 
@@ -164,7 +167,7 @@ The Gym Management System streamlines class scheduling and membership with Admin
 #### 1. Clone the Repository
 
 ```
-https://github.com/shahinexy/Storage-Management-System.git
+https://github.com/shahinexy/Gym-Management-System-Server.git
 ```
 
 #### 2. Install Dependencies
