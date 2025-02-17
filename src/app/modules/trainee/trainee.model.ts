@@ -33,6 +33,7 @@ const traineeSchema = new Schema<TTrainee>(
       ref: "User",
     },
     age: { type: Number, required: true },
+    image: { type: String, default: "" },
     gender: { type: String, enum: ["male", "female"], required: true },
     email: {
       type: String,

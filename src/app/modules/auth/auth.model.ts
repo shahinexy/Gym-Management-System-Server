@@ -30,6 +30,7 @@ const userRegisterSchema = new Schema<TUserRegister>(
     },
     age: { type: Number, required: true },
     gender: { type: String, enum: ["male", "female"], required: true },
+    image: { type: String, default: "" },
     email: {
       type: String,
       unique: true,
@@ -52,13 +53,13 @@ const userRegisterSchema = new Schema<TUserRegister>(
   {
     timestamps: true,
     toJSON: {
-      virtuals: true
-    }
+      virtuals: true,
+    },
   }
 );
 
 // virtual
-userRegisterSchema.virtual('fullName').get(function () {
+userRegisterSchema.virtual("fullName").get(function () {
   return `${this?.name?.firstName} ${this?.name?.middleName} ${this?.name?.lastName}`;
 });
 
