@@ -15,4 +15,4 @@ router.post('/create', TrainerController.createTrainer)
 // router.delete('/:productId', DemoController.deleteSingleDemo)
 
 
-export const TrainerRouter = router;
+export const TrainerRouters = router;

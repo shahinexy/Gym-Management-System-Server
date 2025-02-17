@@ -1,32 +1,37 @@
 import express from "express";
-import { AuthRouter } from "../modules/auth/auth.route";
-import { TrainerRouter } from "../modules/trainer/trainer.route";
-import { UserRouter } from "../modules/user/user.route";
-import { AdminRouter } from "../modules/admin/admin.route";
-import { TraineeRouter } from "../modules/trainee/trainee.route";
+import { AuthRouters } from "../modules/auth/auth.route";
+import { TrainerRouters } from "../modules/trainer/trainer.route";
+import { UserRouters } from "../modules/user/user.route";
+import { AdminRouters } from "../modules/admin/admin.route";
+import { TraineeRouters } from "../modules/trainee/trainee.route";
+import { ClassScheduleRouters } from "../modules/classSchedule/classSchedule.route";
 
 const router = express.Router();
 
 const moduleRouter = [
   {
     path: "/auth",
-    router: AuthRouter,
+    router: AuthRouters,
   },
   {
-    path: "/user",
-    router: UserRouter,
+    path: "/users",
+    router: UserRouters,
   },
   {
-    path: "/admin",
-    router: AdminRouter,
+    path: "/admins",
+    router: AdminRouters,
   },
   {
-    path: "/trainer",
-    router: TrainerRouter,
+    path: "/trainers",
+    router: TrainerRouters,
   },
   {
-    path: "/trainee",
-    router: TraineeRouter,
+    path: "/trainees",
+    router: TraineeRouters,
+  },
+  {
+    path: "/class-schedules",
+    router: ClassScheduleRouters,
   },
 ];
 

@@ -1,32 +1,49 @@
 import { z } from "zod";
+import { Days } from "./classSchedule.constant";
 
-const createUserNameValidationSchema = z.object({
-  firstName: z
-    .string()
-    .min(1)
-    .max(20)
-    .refine((value) => /^[A-Z]/.test(value), {
-      message: "First Name must start with a capital letter",
-    }),
-  middleName: z.string(),
-  lastName: z.string(),
+const timeStringSchema = z.string().refine(
+  (time) => {
+    const regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    return regex.test(time);
+  },
+  {
+    message: 'Invalid time format , expected "HH:MM" in 24 hours format',
+  }
+);
+
+export const createScheduleValidationSchema = z.object({
+  body: z
+    .object({
+      day: z.enum(Days),
+      startTime: timeStringSchema,
+      endTime: timeStringSchema,
+      trainer: z.string(),
+      trainees: z
+        .array(z.string(), {
+          message: "Invalid trainee ID",
+        })
+        .optional(),
+      traineeCount: z
+        .number()
+        .min(0, "Trainee count cannot be negative")
+        .default(0),
+    })
+    .refine(
+      (body) => {
+        // startTime : 10:30  => 1970-01-01T10:30
+        //endTime : 12:30  =>  1970-01-01T12:30
+
+        const start = new Date(`1970-01-01T${body.startTime}:00`);
+        const end = new Date(`1970-01-01T${body.endTime}:00`);
+
+        return end > start;
+      },
+      {
+        message: "Start time should be before End time !  ",
+      }
+    ),
 });
 
-const createAdminValidationSchema = z.object({
-  body: z.object({
-    name: createUserNameValidationSchema,
-    age: z.number({ invalid_type_error: "Age is required" }),
-    gender: z.enum(["male", "female"]),
-    email: z
-      .string()
-      .email({ message: "Invalid email address." })
-      .min(1, { message: "Email is required." }),
-    password: z.string().min(1, { message: "Password is required." }),
-    role: z.enum(["admin", "trainer", "trainee"]).default("trainee"),
-    isBlocked: z.boolean().default(false),
-  }),
-});
-
-export const AdminValidations = {
-  createAdminValidationSchema,
+export const ClassScheduleValidations = {
+  createScheduleValidationSchema,
 };

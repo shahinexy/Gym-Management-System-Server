@@ -25,4 +25,4 @@ router.post(
   UserControllers.createTrainee
 );
 
-export const UserRouter = router;
+export const UserRouters = router;

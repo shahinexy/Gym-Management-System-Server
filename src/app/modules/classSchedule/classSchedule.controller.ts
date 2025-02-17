@@ -2,12 +2,12 @@
 import sendResponse from "../../utils/sendResponse";
 import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
-import { AdminServices } from "./classSchedule.service";
+import { ClassScheduleServices } from "./classSchedule.service";
 
 
-const getAllUsers = catchAsync(async (req, res) => {
+const createClassSchedule = catchAsync(async (req, res) => {
 
-  const result = await AdminServices.getAllUserFromDB();
+  const result = await ClassScheduleServices.createClassScheduleIntoDB(req.body);
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -17,6 +17,6 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
-export const AdminControllers = {
-  getAllUsers
+export const ClassScheduleControllers = {
+  createClassSchedule
 };

@@ -7,6 +7,6 @@ export type TClassSchedule = {
   startTime: string;
   endTime: string;
   trainer: Types.ObjectId;
-  trainees: Types.ObjectId[];
+  trainees?: Types.ObjectId[];
   traineeCount: number;
 };

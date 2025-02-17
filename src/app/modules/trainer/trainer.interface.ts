@@ -8,12 +8,12 @@ export type TUserName = {
 
 export type TTrainer = {
   name: TUserName;
-  user: Types.ObjectId
+  user: Types.ObjectId;
   age: number;
   gender: "male" | "female";
-  image?: string,
+  image?: string;
   role: "admin" | "trainer" | "trainee";
   email: string;
-  assignedSchedules?: [Types.ObjectId];
+  assignedSchedules?: Types.ObjectId[];
   isBlocked: boolean;
 };

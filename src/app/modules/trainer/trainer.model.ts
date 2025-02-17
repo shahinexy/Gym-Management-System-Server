@@ -48,7 +48,7 @@ const trainerSchema = new Schema<TTrainer>(
     assignedSchedules: [
       {
         type: Schema.Types.ObjectId,
-        ref: "",
+        ref: "ClassSchedule",
       },
     ],
     isBlocked: {

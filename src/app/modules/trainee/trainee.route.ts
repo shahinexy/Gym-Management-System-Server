@@ -7,4 +7,4 @@ const router = express.Router();
 
 router.get("/users", auth('admin', 'trainee'), TraineeControllers.getAllUsers);
 
-export const TraineeRouter = router;
+export const TraineeRouters = router;

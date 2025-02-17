@@ -1,12 +1,13 @@
 
-import { UserModle } from "../user/user.model";
+import { TClassSchedule } from "./classSchedule.interface";
+import { ClassScheduleModle } from "./classSchedule.model";
 
 
-const getAllUserFromDB = async () =>{
-    const result = await UserModle.find()
+const createClassScheduleIntoDB = async (payload: TClassSchedule) =>{
+    const result = await ClassScheduleModle.create(payload)
     return result;
 }
 
-export const AdminServices = {
-  getAllUserFromDB,
+export const ClassScheduleServices = {
+  createClassScheduleIntoDB,
 };

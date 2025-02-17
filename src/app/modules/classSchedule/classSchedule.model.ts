@@ -1,10 +1,12 @@
 import { Schema, model } from "mongoose";
 import { TClassSchedule } from "./classSchedule.interface";
+import { Days } from "./classSchedule.constant";
 
 const classScheduleSchema = new Schema<TClassSchedule>(
   {
-    date: {
-      type: Date,
+    day: {
+      type: String,
+      enum: Days,
       required: true,
     },
     startTime: {
