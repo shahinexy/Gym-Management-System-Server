@@ -9,6 +9,8 @@ export type TClassSchedule = {
   trainer: Types.ObjectId;
   trainees?: Types.ObjectId[];
   traineeCount: number;
+  maxTrainees?: number;
+  availableSlots?: number;
 };
 
 export type TSchedule = {

@@ -1,6 +1,8 @@
 import status from "http-status";
 import AppError from "../../error/AppError";
-import { TClassSchedule } from "./classSchedule.interface";
+import {
+  TClassSchedule,
+} from "./classSchedule.interface";
 import { ClassScheduleModle } from "./classSchedule.model";
 import { TrainerModle } from "../trainer/trainer.model";
 import moment from "moment";
@@ -70,7 +72,10 @@ const createClassScheduleIntoDB = async (payload: TClassSchedule) => {
   }
 
   // assign trainee count
+  const maxTrainee = 10;
   payload.traineeCount = traineeCount;
+  payload.maxTrainees = maxTrainee;
+  payload.availableSlots = maxTrainee - traineeCount;
 
   const result = await ClassScheduleModle.create(payload);
   return result;
@@ -81,7 +86,58 @@ const getAllClassScheduleFromDB = async () => {
   return result;
 };
 
+const getSingleClassScheduleFromDB = async (id: string) => {
+  const result = await ClassScheduleModle.findById(id);
+  return result;
+};
+
+const updateClassSchedule = async (
+  id: string,
+  payload: Pick<TClassSchedule, "startTime" | "endTime" | "trainer">
+) => {
+  // check if schedule exists
+  const isScheduleExists = await ClassScheduleModle.findById(id);
+
+  if (!isScheduleExists) {
+    throw new AppError(status.NOT_FOUND, "Class Schedule not found");
+  }
+  // check schedule time conflict
+  const otherShedules = await ClassScheduleModle.find({
+    days: { $in: isScheduleExists.days },
+  }).select("days startTime endTime");
+
+  const newSchedule = {
+    days: isScheduleExists.days,
+    startTime: payload.startTime,
+    endTime: payload.endTime,
+  };
+
+  if (hasTimeConflict(otherShedules, newSchedule)) {
+    throw new AppError(
+      status.CONFLICT,
+      "Another class is already scheduled during this time slot."
+    );
+  }
+
+  const result = await ClassScheduleModle.findByIdAndUpdate(id, payload, {
+    runValidators: true,
+    new: true,
+  });
+
+  return result;
+};
+
+
+const deleteClassScheduleFromDB = async (id: string) => {
+  const result = await ClassScheduleModle.findByIdAndDelete(id);
+  return result;
+};
+
+
 export const ClassScheduleServices = {
   createClassScheduleIntoDB,
   getAllClassScheduleFromDB,
+  getSingleClassScheduleFromDB,
+  updateClassSchedule,
+  deleteClassScheduleFromDB
 };

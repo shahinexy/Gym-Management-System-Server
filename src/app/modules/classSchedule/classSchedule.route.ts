@@ -13,4 +13,10 @@ router.post(
 
 router.get('/', ClassScheduleControllers.getAllClassSchedule)
 
+router.get('/:id', ClassScheduleControllers.getSingleClassSchedule)
+
+router.patch('/:id', ClassScheduleControllers.updateClassSchedule)
+
+router.delete('/:id', ClassScheduleControllers.deleteClassSchedule)
+
 export const ClassScheduleRouters = router;

@@ -35,6 +35,8 @@ const classScheduleSchema = new Schema<TClassSchedule>(
       required: true,
       default: 0,
     },
+    maxTrainees: { type: Number, default: 10 },
+    availableSlots: { type: Number },
   },
   {
     timestamps: true,
