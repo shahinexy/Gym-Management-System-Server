@@ -11,12 +11,27 @@ router.post(
   ClassScheduleControllers.createClassSchedule
 );
 
-router.get('/', ClassScheduleControllers.getAllClassSchedule)
+router.get("/", ClassScheduleControllers.getAllClassSchedule);
 
-router.get('/:id', ClassScheduleControllers.getSingleClassSchedule)
+router.get("/:id", ClassScheduleControllers.getSingleClassSchedule);
 
-router.patch('/:id', ClassScheduleControllers.updateClassSchedule)
+router.patch(
+  "/:id",
+  validateRequest(ClassScheduleValidations.updateScheduleValidationSchema),
+  ClassScheduleControllers.updateClassSchedule
+);
 
-router.delete('/:id', ClassScheduleControllers.deleteClassSchedule)
+router.put(
+  "/:id/assign-trainee",
+  validateRequest(ClassScheduleValidations.assignTraineeValidationSchema),
+  ClassScheduleControllers.assignTraineeWithClassSchedule
+);
+
+router.delete(
+  "/:id/remove-trainee",
+  ClassScheduleControllers.removeTraineeFromClassSchedule
+);
+
+router.delete("/:id", ClassScheduleControllers.deleteClassSchedule);
 
 export const ClassScheduleRouters = router;

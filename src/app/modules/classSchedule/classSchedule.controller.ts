@@ -51,6 +51,30 @@ const updateClassSchedule = catchAsync(async (req, res) => {
   });
 });
 
+const assignTraineeWithClassSchedule = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ClassScheduleServices.assignTraineeWithClassSchedule(id, req.body);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Assign trainee successfully",
+    data: result,
+  });
+});
+
+const removeTraineeFromClassSchedule = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ClassScheduleServices.removeTraineeFromClassSchedule(id, req.body);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Remove trainee successfully",
+    data: result,
+  });
+});
+
 const deleteClassSchedule = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await ClassScheduleServices.deleteClassScheduleFromDB(id);
@@ -68,5 +92,7 @@ export const ClassScheduleControllers = {
   getAllClassSchedule,
   getSingleClassSchedule,
   updateClassSchedule,
+  assignTraineeWithClassSchedule,
+  removeTraineeFromClassSchedule,
   deleteClassSchedule
 };

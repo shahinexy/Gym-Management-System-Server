@@ -1,8 +1,6 @@
 import status from "http-status";
 import AppError from "../../error/AppError";
-import {
-  TClassSchedule,
-} from "./classSchedule.interface";
+import { TClassSchedule } from "./classSchedule.interface";
 import { ClassScheduleModle } from "./classSchedule.model";
 import { TrainerModle } from "../trainer/trainer.model";
 import moment from "moment";
@@ -127,17 +125,74 @@ const updateClassSchedule = async (
   return result;
 };
 
+const assignTraineeWithClassSchedule = async (
+  id: string,
+  payload: Pick<TClassSchedule, "trainees">
+) => {
+  // check if schedule exists
+  const isScheduleExists = await ClassScheduleModle.findById(id);
 
-const deleteClassScheduleFromDB = async (id: string) => {
-  const result = await ClassScheduleModle.findByIdAndDelete(id);
+  if (!isScheduleExists) {
+    throw new AppError(status.NOT_FOUND, "Class Schedule not found");
+  }
+
+  const result = await ClassScheduleModle.findByIdAndUpdate(
+    id,
+    {
+      $addToSet: { trainees: { $each: payload.trainees } },
+    },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
   return result;
 };
 
+const removeTraineeFromClassSchedule = async (
+  id: string,
+  payload: Pick<TClassSchedule, "trainees">
+) => {
+  // check if schedule exists
+  const isScheduleExists = await ClassScheduleModle.findById(id);
+
+  if (!isScheduleExists) {
+    throw new AppError(status.NOT_FOUND, "Class Schedule not found");
+  }
+
+  const result = await ClassScheduleModle.findByIdAndUpdate(
+    id,
+    {
+      $pull: { trainees: { $in: payload.trainees } },
+    },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
+  return result;
+};
+
+const deleteClassScheduleFromDB = async (id: string) => {
+  // check if schedule exists
+  const isScheduleExists = await ClassScheduleModle.findById(id);
+
+  if (!isScheduleExists) {
+    throw new AppError(status.NOT_FOUND, "Class Schedule not found");
+  }
+
+  const result = await ClassScheduleModle.findByIdAndDelete(id);
+  return result;
+};
 
 export const ClassScheduleServices = {
   createClassScheduleIntoDB,
   getAllClassScheduleFromDB,
   getSingleClassScheduleFromDB,
   updateClassSchedule,
-  deleteClassScheduleFromDB
+  assignTraineeWithClassSchedule,
+  removeTraineeFromClassSchedule,
+  deleteClassScheduleFromDB,
 };

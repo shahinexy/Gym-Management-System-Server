@@ -44,6 +44,39 @@ export const createScheduleValidationSchema = z.object({
     ),
 });
 
+export const updateScheduleValidationSchema = z.object({
+  body: z
+    .object({
+      startTime: timeStringSchema.optional(),
+      endTime: timeStringSchema.optional(),
+      trainer: z.string().optional(),
+    })
+    .refine(
+      (body) => {
+        // startTime : 10:30  => 1970-01-01T10:30
+        //endTime : 12:30  =>  1970-01-01T12:30
+
+        const start = new Date(`1970-01-01T${body.startTime}:00`);
+        const end = new Date(`1970-01-01T${body.endTime}:00`);
+
+        return end > start;
+      },
+      {
+        message: "Start time should be before End time !  ",
+      }
+    ),
+});
+
+const assignTraineeValidationSchema = z.object({
+  body: z.object({
+    trainees: z.array(z.string(), {
+      message: "Invalid trainee ID",
+    }),
+  }),
+});
+
 export const ClassScheduleValidations = {
   createScheduleValidationSchema,
+  updateScheduleValidationSchema,
+  assignTraineeValidationSchema
 };
