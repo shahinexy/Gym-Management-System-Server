@@ -8,35 +8,46 @@ const router = express.Router();
 
 router.post(
   "/create-class-schedule",
-  auth('admin'),
+  auth("admin"),
   validateRequest(ClassScheduleValidations.createScheduleValidationSchema),
   ClassScheduleControllers.createClassSchedule
 );
 
-router.get("/", auth('admin'), ClassScheduleControllers.getAllClassSchedule);
+router.get("/", auth("admin"), ClassScheduleControllers.getAllClassSchedule);
+
+router.get(
+  "/my-class-schedule",
+  auth("trainer"),
+  ClassScheduleControllers.getMyClassSchedule
+);
 
 router.get("/:id", ClassScheduleControllers.getSingleClassSchedule);
 
 router.patch(
   "/:id",
-  auth('admin'),
+  auth("admin"),
   validateRequest(ClassScheduleValidations.updateScheduleValidationSchema),
   ClassScheduleControllers.updateClassSchedule
 );
 
 router.put(
   "/:id/assign-trainee",
-  auth('admin'),
+  auth("admin"),
   validateRequest(ClassScheduleValidations.assignTraineeValidationSchema),
   ClassScheduleControllers.assignTraineeWithClassSchedule
 );
 
 router.delete(
   "/:id/remove-trainee",
-  auth('admin'),
+  auth("admin"),
   ClassScheduleControllers.removeTraineeFromClassSchedule
 );
 
-router.delete("/:id", auth('admin'), ClassScheduleControllers.deleteClassSchedule);
+router.delete(
+  "/:id",
+  auth("admin"),
+  ClassScheduleControllers.deleteClassSchedule
+);
+
 
 export const ClassScheduleRouters = router;

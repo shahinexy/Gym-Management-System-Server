@@ -17,6 +17,19 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleUser = catchAsync(async (req, res) => {
+
+  const result = await AdminServices.getSingleUserFromDB(req.params.id);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "User are retrieved Successfully",
+    data: result,
+  });
+});
+
 export const AdminControllers = {
-  getAllUsers
+  getAllUsers,
+  getSingleUser
 };

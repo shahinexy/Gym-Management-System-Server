@@ -7,6 +7,12 @@ const getAllUserFromDB = async () =>{
     return result;
 }
 
+const getSingleUserFromDB = async (id: string) =>{
+    const result = await UserModle.findById(id)
+    return result;
+}
+
 export const AdminServices = {
   getAllUserFromDB,
+  getSingleUserFromDB
 };

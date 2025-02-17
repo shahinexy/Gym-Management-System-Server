@@ -1,12 +1,20 @@
-import { TTrainer } from "./trainer.interface"
+
+import { TrainerModle } from "./trainer.model"
 
 
 
-const createTrainerIntoDB = async (payload: TTrainer) =>{
+const getAllTrainerFromDB = async () =>{
+    const result = await TrainerModle.find()
+    return result
+}
 
+const getSingleTrainerFromDB = async (id: string) =>{
+    const result = await TrainerModle.findById(id)
+    return result
 }
 
 
-export const TrainerService = {
-    createTrainerIntoDB,
+export const TrainerServices = {
+    getAllTrainerFromDB,
+    getSingleTrainerFromDB,
 }

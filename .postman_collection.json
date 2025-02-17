@@ -1,0 +1,733 @@
+{
+	"info": {
+		"_postman_id": "c6bba533-bf90-4a72-b914-a72853daaf57",
+		"name": "Gym Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40338347"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"shahin@gmail.com\",\r\n  \"password\": \"Shahin123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/auth/login",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trainee Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"trainee@gmail.com\",\r\n  \"password\": \"Trainee123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/auth/login",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trainer Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"trainer@gmail.com\",\r\n  \"password\": \"Trainer123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/auth/login",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trainer",
+			"item": [
+				{
+					"name": "Get All Trainer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/trainers",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"trainers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Trainer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/trainers/67b35048069168baad07601d",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"trainers",
+								"67b35048069168baad07601d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Shahin\",\r\n        \"lastName\": \"Alam\"\r\n    },\r\n    \"age\": 21,\r\n    \"gender\": \"male\",\r\n    \"email\": \"shahin@gmail.com\",\r\n    \"password\": \"Shahin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/users/create-admin",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"users",
+								"create-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trainer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Trainer\",\r\n        \"middleName\": \"A.\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    \"age\": 21,\r\n    \"gender\": \"male\",\r\n    \"email\": \"trainer@gmail.com\",\r\n    \"password\": \"Trainer123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/users/create-trainer",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"users",
+								"create-trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trainee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": {\r\n        \"firstName\": \"Trainee\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    \"age\": 21,\r\n    \"gender\": \"male\",\r\n    \"email\": \"trainee@gmail.com\",\r\n    \"password\": \"Trainee123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/users/create-trainee",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"users",
+								"create-trainee"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Class Schedule",
+			"item": [
+				{
+					"name": "Create Class Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"days\": [\r\n        \"Sun\",\r\n        \"Mon\"\r\n    ],\r\n    \"startTime\": \"10:00\",\r\n    \"endTime\": \"12:00\",\r\n    \"trainer\": \"67b35048069168baad07601d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/create-class-schedule",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"create-class-schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Class Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Class Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/67b2d943fc41347e17b6c983",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"67b2d943fc41347e17b6c983"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Class Schedule",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"startTime\": \"10:00\",\r\n    \"endTime\": \"12:00\",\r\n    \"trainer\": \"65b4f3e8a3b2c7d9f1e45678\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/67b2d943fc41347e17b6c983",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"67b2d943fc41347e17b6c983"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Class Schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/67b2f5fbdc077e313bf7b01f",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"67b2f5fbdc077e313bf7b01f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Trainee Into Class Schedule",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trainees\": [\r\n        \"67b3507e069168baad076023\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/67b3533ca075ff534990ac78/assign-trainee",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"67b3533ca075ff534990ac78",
+								"assign-trainee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Trainee From Class Schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trainees\": [\r\n        \"65b4f3e8a3b2c7d9f1e45602\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/67b2f85d476b568c79658e0f/remove-trainee",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"67b2f85d476b568c79658e0f",
+								"remove-trainee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Class Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Trainer Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/class-schedules/my-class-schedule",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"class-schedules",
+								"my-class-schedule"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking Schedule",
+			"item": [
+				{
+					"name": "Book Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2IyMzVkMzllZjNjYmM0ZWY5ZmFmYzciLCJ1c2VyUm9sZSI6InRyYWluZWUiLCJpYXQiOjE3Mzk3OTEzNzAsImV4cCI6MTczOTg3Nzc3MH0.8KazB2p_vs7qXkCfhHZ1ljesYh3rkk704eDoQ-9CvJ4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classSchedule\": \"67b3343ef7223b22bb973291\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/bookings/book-schedule",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"bookings",
+								"book-schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booked Schedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2IyMzVkMzllZjNjYmM0ZWY5ZmFmYzciLCJ1c2VyUm9sZSI6InRyYWluZWUiLCJpYXQiOjE3Mzk3OTEzNzAsImV4cCI6MTczOTg3Nzc3MH0.8KazB2p_vs7qXkCfhHZ1ljesYh3rkk704eDoQ-9CvJ4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classSchedule\": \"67b33401f7223b22bb973282\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/bookings/cancel-schedule",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"bookings",
+								"cancel-schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Booked Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2IyMzVkMzllZjNjYmM0ZWY5ZmFmYzciLCJ1c2VyUm9sZSI6InRyYWluZWUiLCJpYXQiOjE3Mzk3OTEzNzAsImV4cCI6MTczOTg3Nzc3MH0.8KazB2p_vs7qXkCfhHZ1ljesYh3rkk704eDoQ-9CvJ4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/bookings",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Booked Schedule",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2IyMzVkMzllZjNjYmM0ZWY5ZmFmYzciLCJ1c2VyUm9sZSI6InRyYWluZWUiLCJpYXQiOjE3Mzk3OTEzNzAsImV4cCI6MTczOTg3Nzc3MH0.8KazB2p_vs7qXkCfhHZ1ljesYh3rkk704eDoQ-9CvJ4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Gym-local-url}}/bookings/my-booked-schedules",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"bookings",
+								"my-booked-schedules"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Gym-local-url}}/admins/users",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"admins",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin-Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Gym-local-url}}/admins/users/67b3507e069168baad076021",
+							"host": [
+								"{{Gym-local-url}}"
+							],
+							"path": [
+								"admins",
+								"users",
+								"67b3507e069168baad076021"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

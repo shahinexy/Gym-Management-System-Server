@@ -2,6 +2,7 @@ import sendResponse from "../../utils/sendResponse";
 import status from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import { ClassScheduleServices } from "./classSchedule.service";
+import { JwtPayload } from "jsonwebtoken";
 
 const createClassSchedule = catchAsync(async (req, res) => {
   const result = await ClassScheduleServices.createClassScheduleIntoDB(
@@ -87,6 +88,18 @@ const deleteClassSchedule = catchAsync(async (req, res) => {
   });
 });
 
+const getMyClassSchedule = catchAsync(async (req, res) => {
+  const { userId } = req.user as JwtPayload;
+  const result = await ClassScheduleServices.getMyClassSchedule(userId);
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "My Class Schedule retrieved successfully",
+    data: result,
+  });
+});
+
 export const ClassScheduleControllers = {
   createClassSchedule,
   getAllClassSchedule,
@@ -94,5 +107,6 @@ export const ClassScheduleControllers = {
   updateClassSchedule,
   assignTraineeWithClassSchedule,
   removeTraineeFromClassSchedule,
-  deleteClassSchedule
+  deleteClassSchedule,
+  getMyClassSchedule
 };

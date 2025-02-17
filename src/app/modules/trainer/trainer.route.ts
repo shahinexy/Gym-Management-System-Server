@@ -1,18 +1,11 @@
-import express from 'express'
-import { TrainerController } from './trainer.controller';
-
+import express from "express";
+import { TrainerControllers } from "./trainer.controller";
+import auth from "../../middleware/auth";
 
 const router = express.Router();
 
-router.post('/create', TrainerController.createTrainer)
+router.get("/", auth('admin'), TrainerControllers.getAllTrainers);
 
-// router.get('/', DemoController.getDemos)
-
-// router.get('/:productId', DemoController.getSingleDemo)
-
-// router.put('/:productId', DemoController.updateSingleDemo)
-
-// router.delete('/:productId', DemoController.deleteSingleDemo)
-
+router.get("/:id", auth('admin'), TrainerControllers.getSingleTrainer);
 
 export const TrainerRouters = router;

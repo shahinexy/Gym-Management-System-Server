@@ -5,6 +5,7 @@ import { ClassScheduleModle } from "./classSchedule.model";
 import { TrainerModle } from "../trainer/trainer.model";
 import moment from "moment";
 import { hasTimeConflict } from "./classSchedule.utils";
+import { TraineeModle } from "../trainee/trainee.model";
 
 const createClassScheduleIntoDB = async (payload: TClassSchedule) => {
   // check if Class schedule limit reached
@@ -148,6 +149,15 @@ const assignTraineeWithClassSchedule = async (
     throw new AppError(status.BAD_REQUEST, "No trainees provided");
   }
 
+  // Check if all provided trainees exist in the database
+  const existingTrainees = await TraineeModle.find({
+    _id: { $in: payload.trainees },
+  });
+
+  if (existingTrainees.length !== payload.trainees.length) {
+    throw new AppError(status.NOT_FOUND, "One or more trainees do not exist");
+  }
+
   // Calculate new trainee count
   const newTraineeCount =
     isScheduleExists.traineeCount + payload.trainees.length;
@@ -196,6 +206,15 @@ const removeTraineeFromClassSchedule = async (
     throw new AppError(status.BAD_REQUEST, "No trainees provided for removal");
   }
 
+  // Check if all provided trainees exist in the database
+  const existingTrainees = await TraineeModle.find({
+    _id: { $in: payload.trainees },
+  });
+
+  if (existingTrainees.length !== payload.trainees.length) {
+    throw new AppError(status.NOT_FOUND, "One or more trainees do not exist");
+  }
+
   const traineesNumber = payload.trainees.length;
 
   const result = await ClassScheduleModle.findByIdAndUpdate(
@@ -225,6 +244,13 @@ const deleteClassScheduleFromDB = async (id: string) => {
   return result;
 };
 
+const getMyClassSchedule = async (userId: string) => {
+  const trainer = await TrainerModle.findOne({ user: userId });
+
+  const result = await ClassScheduleModle.find({ trainer: trainer?._id });
+  return result;
+};
+
 export const ClassScheduleServices = {
   createClassScheduleIntoDB,
   getAllClassScheduleFromDB,
@@ -233,4 +259,5 @@ export const ClassScheduleServices = {
   assignTraineeWithClassSchedule,
   removeTraineeFromClassSchedule,
   deleteClassScheduleFromDB,
+  getMyClassSchedule,
 };
